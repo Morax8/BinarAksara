@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BinarAksara
 
-## Getting Started
+BinarAksara adalah pendamping belajar adaptif 100% client-side untuk siswa berkebutuhan khusus, termasuk siswa dengan disleksia, ADHD, dan low vision. Aplikasi ini dirancang untuk mengubah teks materi pelajaran menjadi modul belajar multisensori.
 
-First, run the development server:
+## Latar belakang
+
+Materi pelajaran berbasis teks sering belum sesuai dengan kebutuhan membaca dan pemrosesan informasi setiap siswa. BinarAksara bertujuan menyediakan pengalaman belajar yang dapat disesuaikan tanpa mengirim materi pengguna ke server.
+
+## Tujuan
+
+- Menyediakan tampilan bacaan yang dapat disesuaikan dengan profil pengguna.
+- Memecah materi menjadi bentuk belajar yang lebih mudah diikuti.
+- Mendukung pengalaman multisensori melalui teks dan text-to-speech.
+- Menjaga data tetap berada di perangkat pengguna, tanpa backend atau database.
+
+## Fitur
+
+Seluruh fitur berikut berstatus **rencana**; struktur awalnya tersedia, tetapi logika fitur belum diimplementasikan.
+
+| Fitur | Status |
+| --- | --- |
+| Preset profil standar, disleksia, ADHD, dan low vision | Rencana |
+| Pengaturan tipografi dan reading ruler | Rencana |
+| Pemecahan kalimat dan suku kata | Rencana |
+| Kartu belajar, kata kunci, dan latihan rumpang | Rencana |
+| Text-to-speech dengan fallback waktu | Rencana |
+| Estimasi beban kognitif | Rencana |
+| Ekspor dan tampilan cetak | Rencana |
+| Penyimpanan preferensi lokal | Rencana |
+
+## Tech stack
+
+- Next.js 16.4.6 dengan App Router
+- React dan TypeScript
+- Tailwind CSS v4
+- Vitest
+- Static export, tanpa backend, database, atau AI pretrained
+
+## Cara menjalankan
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Pemeriksaan proyek:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run test:run
+npm run typecheck
+npm run lint
+npm run build
+```
 
-## Learn More
+Hasil build statis tersedia di direktori `out`.
 
-To learn more about Next.js, take a look at the following resources:
+## Rubrik dan bukti
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Rubrik | Bukti |
+| --- | --- |
+| Fungsionalitas | Placeholder — belum tersedia |
+| Aksesibilitas | Placeholder — hasil pengujian akan dicatat di `TESTING.md` dan `docs/testing/` |
+| Pengalaman pengguna | Placeholder — belum tersedia |
+| Kualitas kode dan pengujian | Placeholder — laporan verifikasi akan ditambahkan |
+| Dokumentasi | Placeholder — dokumentasi implementasi akan dilengkapi |

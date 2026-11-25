@@ -58,10 +58,10 @@ Hasil build statis tersedia di direktori `out`.
 
 ## Rubrik dan bukti
 
-| Rubrik | Bukti |
-| --- | --- |
-| Fungsionalitas | Placeholder — belum tersedia |
-| Aksesibilitas | Placeholder — hasil pengujian akan dicatat di `TESTING.md` dan `docs/testing/` |
-| Pengalaman pengguna | Placeholder — belum tersedia |
-| Kualitas kode dan pengujian | Placeholder — laporan verifikasi akan ditambahkan |
-| Dokumentasi | Placeholder — dokumentasi implementasi akan dilengkapi |
+| Kriteria | Bobot | Implementasi | Bukti |
+| --- | --- | --- | --- |
+| Kesesuaian Tema | 30% | Empat profil adaptif mengubah warna dan tipografi secara lokal tanpa backend, database, login, atau AI pretrained. | Implementasi tema pada `src/app/globals.css`, `src/lib/profiles.ts`, dan `src/hooks/usePreferences.ts`. |
+| Tujuan dan Dampak Positif | 20% | Preferensi baca dapat disesuaikan dan disimpan di perangkat untuk mendukung kenyamanan membaca. | Evaluasi dampak bersama pengguna belum tersedia. |
+| Fungsi dan Konten Website | 20% | Preset profil, pengaturan tipografi manual, penyimpanan preferensi, dan pratinjau tiga paragraf fotosintesis tersedia; fitur di luar tahap ini belum diimplementasikan. | `src/components/sandbox/Sandbox.tsx` dan `src/components/reader/ReaderView.tsx`; pengujian fungsional end-to-end belum tersedia. |
+| Desain dan Aksesibilitas | 15% | Radiogroup native, label permanen, fokus terlihat, dukungan reduced motion, serta disclosure mobile dengan `aria-expanded` dan `aria-controls`. | Audit aksesibilitas dan pengujian bersama pengguna belum tersedia. |
+| Kualitas Teknis dan Pengujian | 15% | Validasi dan sanitasi preferensi lokal, tipisnya batas client-side, serta unit test untuk preset dan storage. | `src/__tests__/profiles.test.ts` dan `src/__tests__/storage.test.ts`; hasil pemeriksaan akhir dilaporkan bersama perubahan. |

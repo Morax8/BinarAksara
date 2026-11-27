@@ -71,7 +71,7 @@ export default function ManualSettings({
   }
 
   return (
-    <section aria-labelledby="manual-settings-title" className="mt-8">
+    <section aria-labelledby="manual-settings-title">
       <h2 id="manual-settings-title" className="text-xl font-bold">
         Pengaturan manual
       </h2>

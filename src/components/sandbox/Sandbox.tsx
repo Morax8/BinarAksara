@@ -15,7 +15,11 @@ import { usePreferences } from "@/hooks/usePreferences";
 
 export default function Sandbox() {
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [source, setSource] = useState({ text: "", title: "Materi Belajar", sampleId: null as string | null });
+  const [source, setSource] = useState({
+    text: SAMPLES[0].content,
+    title: SAMPLES[0].title,
+    sampleId: SAMPLES[0].id as string | null,
+  });
   const [mode, setMode] = useState<"full" | "card">("full");
   const [focusMode, setFocusMode] = useState(false);
   const [lineHeight, setLineHeight] = useState(28.8);
@@ -77,7 +81,13 @@ export default function Sandbox() {
         </header>
       )}
 
-      <div className={`${focusMode ? "max-w-4xl" : "max-w-6xl md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:items-start md:gap-8"} mx-auto grid w-full gap-6 px-4 py-6 md:px-8 md:py-8`}>
+      {!focusMode && (
+        <div className="mx-auto w-full max-w-6xl px-4 pt-6 md:px-8">
+          <ProfilePresets activeProfile={preferences.activeProfile} isCustom={isCustom} onSelect={applyProfile} />
+        </div>
+      )}
+
+      <div className={`${focusMode ? "max-w-4xl" : "max-w-6xl md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:gap-8"} mx-auto grid w-full gap-6 px-4 py-6 md:grid md:items-start md:px-8`}>
         <section aria-label="Pratinjau baca" className="order-1 min-w-0 md:order-2">
           {!focusMode && <h2 className="mb-3 text-xl font-bold">Pratinjau baca</h2>}
           {learningModule ? (
@@ -122,7 +132,8 @@ export default function Sandbox() {
                     ref={focusButtonRef}
                     type="button"
                     onClick={() => setFocusMode(true)}
-                    className="min-h-11 rounded-lg bg-[var(--ba-accent)] px-4 py-2 font-bold text-[var(--ba-on-accent)]"
+                    aria-pressed={focusMode}
+                    className="min-h-11 rounded-lg border-2 border-[var(--ba-border-ui)] bg-[var(--ba-surface)] px-4 py-2 font-bold text-[var(--ba-fg)]"
                   >
                     Mode fokus
                   </button>
@@ -153,27 +164,32 @@ export default function Sandbox() {
         {!focusMode && (
           <div className="order-2 min-w-0 md:order-1">
             <InputPanel activeSampleId={source.sampleId} onSelectSample={selectSample} onApply={applyText} />
-            <button
-              type="button"
-              aria-expanded={settingsOpen}
-              aria-controls="pengaturan-tampilan"
-              onClick={() => setSettingsOpen((open) => !open)}
-              className="mt-6 flex min-h-12 w-full items-center justify-between gap-4 rounded-xl border-2 border-[var(--ba-border-ui)] bg-[var(--ba-surface)] px-4 py-3 text-left font-bold md:hidden"
-            >
-              Sesuaikan tampilan
-              <span aria-hidden="true" className="text-2xl leading-none">{settingsOpen ? "−" : "+"}</span>
-            </button>
-            <div
-              id="pengaturan-tampilan"
-              className={`${settingsOpen ? "block" : "hidden"} mt-4 rounded-2xl border border-[var(--ba-border)] bg-[var(--ba-surface)] p-6 md:mt-6 md:block md:p-8`}
-            >
-              <h2 className="mb-5 hidden text-2xl font-bold md:block">Sesuaikan tampilan</h2>
-              <ProfilePresets activeProfile={preferences.activeProfile} isCustom={isCustom} onSelect={applyProfile} />
-              <ManualSettings preferences={preferences} onChange={updatePreference} onReset={resetProfile} />
-            </div>
           </div>
         )}
       </div>
+
+      {!focusMode && (
+        <div className="mx-auto w-full max-w-6xl px-4 pb-6 md:px-8 md:pb-8">
+          <button
+            type="button"
+            aria-expanded={settingsOpen}
+            aria-controls="pengaturan-tampilan"
+            onClick={() => setSettingsOpen((open) => !open)}
+            className="flex min-h-12 w-full items-center justify-between gap-4 rounded-xl border-2 border-[var(--ba-border-ui)] bg-[var(--ba-surface)] px-4 py-3 text-left font-bold"
+          >
+            Sesuaikan tampilan
+            <span aria-hidden="true" className="text-2xl leading-none">{settingsOpen ? "−" : "+"}</span>
+          </button>
+          {settingsOpen && (
+            <div
+              id="pengaturan-tampilan"
+              className="mt-4 rounded-2xl border border-[var(--ba-border)] bg-[var(--ba-surface)] p-6 md:p-8"
+            >
+              <ManualSettings preferences={preferences} onChange={updatePreference} onReset={resetProfile} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -62,6 +62,18 @@ Materi uji: sampel Kompleksitas Waktu (9 kartu) dan teks tempel pengguna.
 | Privasi teks tempel | Materi diterapkan ke reader; tidak tersimpan di localStorage; satu-satunya key adalah preferensi | Lolos |
 | Request eksternal | 0 | Lolos |
 
+## Verifikasi tata letak profil — 27 November 2026
+
+| Pemeriksaan | Hasil terukur | Status |
+| --- | --- | --- |
+| Sampel default | Fotosintesis langsung tampil saat pertama buka | Lolos |
+| Pengaturan manual | `aria-expanded=false`, panel tidak ada di DOM saat tertutup (desktop dan mobile) | Lolos |
+| Desktop 1280px | Profil di y=189; input kiri x=89 dan pratinjau kanan x=590 pada y yang sama | Lolos |
+| Efek satu klik | Klik Low Vision mengubah reader 18px → 26.1px dengan pratinjau tetap terlihat | Lolos |
+| Deskripsi profil | Hanya satu deskripsi profil aktif; "✓ Dipilih" dipertahankan | Lolos |
+| Mobile 390px | Profil 2x2 (dua baris y=257/313) → pratinjau → materi → pengaturan | Lolos |
+| Regresi mode fokus | Profil, input, dan pengaturan hilang dari DOM | Lolos |
+
 ## Matriks perangkat dan browser
 
 | Perangkat | Sistem operasi | Browser | Status | Catatan |

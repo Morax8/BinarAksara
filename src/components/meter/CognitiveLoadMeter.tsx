@@ -44,7 +44,7 @@ export default function CognitiveLoadMeter({ load }: CognitiveLoadMeterProps) {
         </div>
       </div>
       <p className="mt-5 text-sm text-[var(--ba-muted)]">
-        Heuristik transparan berdasarkan struktur teks, bukan diagnosis atau pengukuran klinis. After dihitung per sajian kartu; penurunan kecil wajar untuk teks yang kalimatnya sudah sederhana.
+        Heuristik transparan berdasarkan struktur teks, bukan diagnosis atau pengukuran klinis. Sesudah dihitung per sajian kartu; penurunan kecil wajar untuk teks yang kalimatnya sudah sederhana.
       </p>
     </section>
   );

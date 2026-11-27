@@ -8,7 +8,8 @@ yang belum dilakukan.
 
 | Tanggal | Lingkup | Hasil |
 | --- | --- | --- |
-| 25 November 2026 | Theme engine (commit `e74319e`) | Lolos gate otomatis dan verifikasi browser di bawah |
+| 25 November 2026 | Theme engine (commit `e74319e`, kini `fca79bb`) | Lolos gate otomatis dan verifikasi browser di bawah |
+| 27 November 2026 | Reader interaktif (sebelum commit) | 38 test lolos; alur browser lolos, lihat bagian reader |
 | 25 November 2026 | axe, screen reader, Firefox/Safari, perangkat fisik | Belum diuji |
 
 ## Gate otomatis — 25 November 2026
@@ -42,6 +43,24 @@ DOM, localStorage, dan daftar request jaringan; bukan hanya melihat tangkapan la
 | Overlay error/hydration | Tidak ditemukan | Lolos |
 | Navigasi keyboard lengkap dan skip link | Belum diuji menyeluruh; radio native dan atribut ARIA sudah diperiksa di kode | Sebagian |
 | Kontras warna | Token diukur dengan rumus WCAG, lihat `docs/design/tokens.md`; audit axe belum dijalankan | Sebagian |
+
+## Verifikasi reader interaktif — 27 November 2026
+
+Lingkungan sama: static export pada Chromium, interaksi nyata dengan jeda render.
+Materi uji: sampel Kompleksitas Waktu (9 kartu) dan teks tempel pengguna.
+
+| Pemeriksaan | Hasil terukur | Status |
+| --- | --- | --- |
+| Pemilihan sampel | Reader menampilkan isi hasil pipeline; meter menampilkan before 64 · sedang | Lolos |
+| Navigasi kartu | "Kartu 2 dari 9" menjadi "Kartu 3 dari 9"; Sebelumnya nonaktif di kartu pertama | Lolos |
+| Fokus setelah pindah kartu | Fokus berpindah ke heading "Bagian 3" | Lolos |
+| Isolasi mode fokus | Header, input panel, dan pengaturan tidak ada di DOM; fokus ke tombol kembali | Lolos |
+| Keluar mode fokus | Panel kembali dan fokus kembali ke tombol "Mode fokus" | Lolos |
+| Teks asli pada profil Low Vision | Tetap 18px, teks `rgb(15, 23, 42)` pada kartu putih, ruler tidak tampil | Lolos |
+| Ruler dengan tombol | Tombol turun menggeser 46.98px (satu line-height); pointer-events `none` | Lolos |
+| Tinggi ruler | 1 baris 50.98px; 3 baris 144.94px (= 3 × 46.98 + 4) | Lolos |
+| Privasi teks tempel | Materi diterapkan ke reader; tidak tersimpan di localStorage; satu-satunya key adalah preferensi | Lolos |
+| Request eksternal | 0 | Lolos |
 
 ## Matriks perangkat dan browser
 

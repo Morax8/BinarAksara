@@ -5,6 +5,8 @@ import Sandbox from "@/components/sandbox/Sandbox";
 import CardReader from "@/components/reader/CardReader";
 import ReadingRuler from "@/components/reader/ReadingRuler";
 import { buildModule } from "@/lib/nlp";
+import { SAMPLES } from "@/data/samples";
+import { PROFILE_INFO } from "@/lib/profiles";
 
 const testModule = buildModule(
   "Kalimat pertama menjelaskan konsep dasar dengan cukup rinci. Kalimat kedua memberikan contoh penerapan konsep tersebut. Kalimat ketiga membahas langkah berikutnya. Kalimat keempat menyimpulkan seluruh pembahasan materi.",
@@ -90,6 +92,37 @@ describe("ReadingRuler", () => {
     }
     expect(ruler().style.top).toBe("124px");
     expect(screen.getByRole("button", { name: "Turunkan pita" }).hasAttribute("disabled")).toBe(true);
+  });
+});
+
+describe("tata letak Sandbox", () => {
+  it("memuat sampel pertama dan menutup pengaturan manual saat pertama dibuka", () => {
+    render(<Sandbox />);
+
+    expect(screen.getByText(/Fotosintesis adalah proses tumbuhan/)).not.toBeNull();
+    expect(screen.getByRole("button", { name: new RegExp(SAMPLES[0].title) }).getAttribute("aria-pressed")).toBe("true");
+
+    const disclosure = screen.getByRole("button", { name: "Sesuaikan tampilan" });
+    expect(disclosure.getAttribute("aria-expanded")).toBe("false");
+    expect(screen.queryByRole("slider", { name: "Ukuran teks" })).toBeNull();
+
+    fireEvent.click(disclosure);
+    expect(disclosure.getAttribute("aria-expanded")).toBe("true");
+    expect(screen.getByRole("slider", { name: "Ukuran teks" })).not.toBeNull();
+  });
+
+  it("menampilkan deskripsi hanya untuk profil aktif dan mendahulukan pratinjau", () => {
+    const { container } = render(<Sandbox />);
+
+    expect(screen.queryByText(PROFILE_INFO.disleksia.description)).toBeNull();
+    fireEvent.click(screen.getByRole("radio", { name: /^Disleksia/ }));
+    expect(screen.getByText(PROFILE_INFO.disleksia.description)).not.toBeNull();
+    expect(screen.queryByText(PROFILE_INFO.standar.description)).toBeNull();
+
+    const preview = screen.getByRole("region", { name: "Pratinjau baca" });
+    const input = screen.getByRole("region", { name: "Pilih materi" });
+    expect(preview.compareDocumentPosition(input)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.querySelector("fieldset.grid")).not.toBeNull();
   });
 });
 

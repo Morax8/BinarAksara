@@ -123,6 +123,19 @@ export default function ManualSettings({
         })}
       </div>
 
+      <div className="mt-7 border-t border-[var(--ba-border)] pt-5">
+        <label htmlFor="setting-ruler" className="flex min-h-11 cursor-pointer items-center gap-3 font-semibold">
+          <input
+            id="setting-ruler"
+            type="checkbox"
+            checked={preferences.rulerEnabled}
+            onChange={(event) => onChange({ rulerEnabled: event.currentTarget.checked })}
+            className="size-5 shrink-0 accent-[var(--ba-accent)]"
+          />
+          Garis bantu baca
+        </label>
+      </div>
+
       <button
         type="button"
         onClick={onReset}

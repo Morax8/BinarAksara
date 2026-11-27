@@ -8,5 +8,6 @@ export const STOPWORDS_ID: readonly string[] = [
   "perlu", "saat", "saja", "sama", "sangat", "satu", "sebagai", "sebuah",
   "secara", "sedang", "sehingga", "sejak", "semua", "seperti", "serta", "setelah",
   "setiap", "suatu", "sudah", "tanpa", "telah", "tentang", "terhadap", "tersebut",
-  "tetapi", "tidak", "untuk", "yaitu", "yang",
+  "tetapi", "tidak", "untuk", "yaitu", "yang", "berarti", "bagaimana",
+  "berlangsung", "digunakan", "menjadi", "dilakukan",
 ];

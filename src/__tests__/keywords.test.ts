@@ -7,6 +7,12 @@ describe("extractKeywords", () => {
       .toEqual(["Belajar", "Cahaya"]);
   });
 
+  it("menyaring kata kerja dan kata umum akademik dari kata kunci", () => {
+    expect(extractKeywords(
+      "Berarti bagaimana berlangsung digunakan menjadi dilakukan fotosintesis",
+    )).toEqual(["fotosintesis"]);
+  });
+
   it("deterministik, mempertahankan kapitalisasi awal, dan mematuhi limit", () => {
     const text = "Fotosintesis kloroplas Klorofil klorofil glukosa oksigen";
     const first = extractKeywords(text, 2);

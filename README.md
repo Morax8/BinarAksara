@@ -19,7 +19,10 @@ Materi berbasis teks sering belum sesuai dengan kebutuhan membaca dan pemrosesan
 | --- | --- |
 | Preset profil standar, disleksia, ADHD, dan low vision | Selesai |
 | Pengaturan tipografi dan penyimpanan preferensi lokal | Selesai |
-| Reading ruler | Rencana |
+| Pemilihan materi contoh dan tempel teks dalam memori | Selesai |
+| Teks utuh adaptif dan perbandingan dengan teks asli | Selesai |
+| Kartu satu per layar, navigasi, dan mode fokus | Selesai |
+| Reading ruler dengan pointer, keyboard, dan tinggi 1–3 baris | Selesai |
 | Pemecahan kalimat berbasis aturan | Selesai |
 | Kartu belajar, token, dan ekstraksi kata kunci TF | Selesai |
 | Pemenggal suku kata | Rencana; `syllables` masih kosong |

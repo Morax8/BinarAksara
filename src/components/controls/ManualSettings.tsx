@@ -1,7 +1,8 @@
 "use client";
 
 import type { PreferenceUpdate } from "@/hooks/usePreferences";
-import { PROFILE_INFO, type ThemePreferences } from "@/lib/profiles";
+import { PROFILE_INFO } from "@/lib/profiles";
+import type { Preferences } from "@/types";
 
 type NumericPreferenceKey =
   | "fontScale"
@@ -49,7 +50,7 @@ const SETTINGS: SettingDefinition[] = [
 ];
 
 interface ManualSettingsProps {
-  preferences: ThemePreferences;
+  preferences: Preferences;
   onChange: (partial: PreferenceUpdate) => void;
   onReset: () => void;
 }

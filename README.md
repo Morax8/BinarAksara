@@ -1,10 +1,10 @@
 # BinarAksara
 
-BinarAksara adalah pendamping belajar adaptif 100% client-side untuk siswa berkebutuhan khusus, termasuk siswa dengan disleksia, ADHD, dan low vision. Aplikasi ini dirancang untuk mengubah teks materi pelajaran menjadi modul belajar multisensori.
+BinarAksara adalah pendamping belajar adaptif 100% client-side untuk pelajar dan mahasiswa dengan disleksia, ADHD, dan low vision, serta dosen atau pendamping yang memiliki materi teks standar. Aplikasi ini mengubah teks materi menjadi kartu belajar yang dapat disesuaikan tanpa mengirim materi ke server.
 
 ## Latar belakang
 
-Materi pelajaran berbasis teks sering belum sesuai dengan kebutuhan membaca dan pemrosesan informasi setiap siswa. BinarAksara bertujuan menyediakan pengalaman belajar yang dapat disesuaikan tanpa mengirim materi pengguna ke server.
+Materi berbasis teks sering belum sesuai dengan kebutuhan membaca dan pemrosesan informasi setiap pelajar. BinarAksara membantu pengajar menyediakan bahan yang sama dalam potongan yang lebih teratur, sementara pelajar dapat memilih tampilan yang nyaman bagi dirinya.
 
 ## Tujuan
 
@@ -15,18 +15,27 @@ Materi pelajaran berbasis teks sering belum sesuai dengan kebutuhan membaca dan 
 
 ## Fitur
 
-Seluruh fitur berikut berstatus **rencana**; struktur awalnya tersedia, tetapi logika fitur belum diimplementasikan.
-
 | Fitur | Status |
 | --- | --- |
-| Preset profil standar, disleksia, ADHD, dan low vision | Rencana |
-| Pengaturan tipografi dan reading ruler | Rencana |
-| Pemecahan kalimat dan suku kata | Rencana |
-| Kartu belajar, kata kunci, dan latihan rumpang | Rencana |
-| Text-to-speech dengan fallback waktu | Rencana |
-| Estimasi beban kognitif | Rencana |
+| Preset profil standar, disleksia, ADHD, dan low vision | Selesai |
+| Pengaturan tipografi dan penyimpanan preferensi lokal | Selesai |
+| Reading ruler | Rencana |
+| Pemecahan kalimat berbasis aturan | Selesai |
+| Kartu belajar, token, dan ekstraksi kata kunci TF | Selesai |
+| Pemenggal suku kata | Rencana; `syllables` masih kosong |
+| Latihan rumpang | Rencana; `createClozeItems` masih stub |
+| Text-to-speech | Rencana |
+| Estimasi beban teks heuristik | Selesai; bukan pengukuran medis/klinis |
+| Modul dengan skor sebelum/sesudah berbobot jumlah kata | Selesai |
 | Ekspor dan tampilan cetak | Rencana |
-| Penyimpanan preferensi lokal | Rencana |
+
+Pipeline NLP berjalan sepenuhnya di browser: pemisahan kalimat mempertahankan singkatan akademik dan format angka, kartu berisi 1–3 kalimat dengan batas sekitar 420 karakter, dan kata kunci diurutkan berdasarkan frekuensi lalu alfabet. Semua hasil bersifat deterministik. Skor beban hanya heuristik transparan untuk membandingkan teks, bukan diagnosis atau penilaian kemampuan pengguna.
+
+## Skenario penerapan
+
+Seorang dosen menempelkan materi kuliah ke BinarAksara. Mahasiswa kemudian memilih profil baca, materi diolah menjadi urutan kartu, dan modul dapat dicetak dalam tampilan adaptif ketika fitur cetak tersedia. Materi sekolah dapat mengikuti alur yang sama sehingga dosen, guru, dan pendamping tidak perlu menyiapkan salinan teks khusus untuk setiap profil.
+
+Sebagai ilustrasi, alur tersebut dapat digunakan dalam lingkungan Universitas Multimedia Nusantara untuk materi Interaksi Manusia dan Komputer. Ini semata-mata **skenario penggunaan**, bukan klaim penggunaan resmi, kerja sama, atau hasil uji pengguna dengan institusi tersebut.
 
 ## Tech stack
 
@@ -62,6 +71,6 @@ Hasil build statis tersedia di direktori `out`.
 | --- | --- | --- | --- |
 | Kesesuaian Tema | 30% | Empat profil adaptif mengubah warna dan tipografi secara lokal tanpa backend, database, login, atau AI pretrained. | Implementasi tema pada `src/app/globals.css`, `src/lib/profiles.ts`, dan `src/hooks/usePreferences.ts`. |
 | Tujuan dan Dampak Positif | 20% | Preferensi baca dapat disesuaikan dan disimpan di perangkat untuk mendukung kenyamanan membaca. | Evaluasi dampak bersama pengguna belum tersedia. |
-| Fungsi dan Konten Website | 20% | Preset profil, pengaturan tipografi manual, penyimpanan preferensi, dan pratinjau tiga paragraf fotosintesis tersedia; fitur di luar tahap ini belum diimplementasikan. | `src/components/sandbox/Sandbox.tsx` dan `src/components/reader/ReaderView.tsx`; pengujian fungsional end-to-end belum tersedia. |
+| Fungsi dan Konten Website | 20% | Preset profil, pengaturan tipografi, penyimpanan preferensi, pipeline NLP deterministik, dan tiga materi sampel tersedia; fitur di luar tahap ini belum diimplementasikan. | `src/lib/nlp/`, `src/data/samples.ts`, dan unit test NLP; pengujian fungsional end-to-end belum tersedia. |
 | Desain dan Aksesibilitas | 15% | Radiogroup native, label permanen, fokus terlihat, dukungan reduced motion, serta disclosure mobile dengan `aria-expanded` dan `aria-controls`. | Audit aksesibilitas dan pengujian bersama pengguna belum tersedia. |
-| Kualitas Teknis dan Pengujian | 15% | Validasi dan sanitasi preferensi lokal, tipisnya batas client-side, serta unit test untuk preset dan storage. | `src/__tests__/profiles.test.ts` dan `src/__tests__/storage.test.ts`; hasil pemeriksaan akhir dilaporkan bersama perubahan. |
+| Kualitas Teknis dan Pengujian | 15% | Validasi dan sanitasi preferensi lokal, fungsi NLP murni, dan unit test untuk perilaku pemrosesan teks. | `src/__tests__/`; hasil pemeriksaan akhir dilaporkan bersama perubahan. |

@@ -10,16 +10,7 @@ export const PROFILE_IDS = [
 const SYSTEM_FONT_STACK =
   'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
-/**
- * Tambahan token tema yang belum ada pada tipe domain Preferences.
- * Tipe domain asli tetap dipertahankan agar modul lain tidak berubah.
- */
-export interface ThemePreferences extends Preferences {
-  wordSpacing: number;
-  measure: string;
-}
-
-export const DEFAULT_PREFERENCES: ThemePreferences = {
+export const DEFAULT_PREFERENCES: Preferences = {
   activeProfile: "standar",
   fontFamily: SYSTEM_FONT_STACK,
   fontScale: 1,
@@ -34,7 +25,7 @@ export const DEFAULT_PREFERENCES: ThemePreferences = {
 };
 
 // Nilai preset adalah titik awal desain, bukan klaim medis.
-export const PROFILE_PRESETS: Record<ProfileId, ThemePreferences> = {
+export const PROFILE_PRESETS: Record<ProfileId, Preferences> = {
   standar: { ...DEFAULT_PREFERENCES },
   disleksia: {
     ...DEFAULT_PREFERENCES,

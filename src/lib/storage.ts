@@ -2,9 +2,8 @@ import {
   DEFAULT_PREFERENCES,
   PROFILE_IDS,
   PROFILE_PRESETS,
-  type ThemePreferences,
 } from "@/lib/profiles";
-import type { ProfileId } from "@/types";
+import type { Preferences, ProfileId } from "@/types";
 
 export const PREFERENCES_STORAGE_KEY = "binaraksara:preferences:v1";
 
@@ -37,7 +36,7 @@ function validBoolean(value: unknown, fallback: boolean): boolean {
   return typeof value === "boolean" ? value : fallback;
 }
 
-function sanitizePreferences(value: unknown): ThemePreferences | null {
+function sanitizePreferences(value: unknown): Preferences | null {
   if (!isRecord(value)) return null;
 
   const activeProfile = isProfileId(value.activeProfile)
@@ -78,7 +77,7 @@ function sanitizePreferences(value: unknown): ThemePreferences | null {
   };
 }
 
-export function loadPreferences(): ThemePreferences | null {
+export function loadPreferences(): Preferences | null {
   if (typeof window === "undefined") return null;
 
   try {
@@ -90,7 +89,7 @@ export function loadPreferences(): ThemePreferences | null {
   }
 }
 
-export function savePreferences(preferences: ThemePreferences): void {
+export function savePreferences(preferences: Preferences): void {
   if (typeof window === "undefined") return;
 
   try {

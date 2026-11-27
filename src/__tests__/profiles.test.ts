@@ -3,14 +3,13 @@ import {
   DEFAULT_PREFERENCES,
   PROFILE_IDS,
   PROFILE_PRESETS,
-  type ThemePreferences,
 } from "@/lib/profiles";
-import type { ProfileId } from "@/types";
+import type { Preferences, ProfileId } from "@/types";
 
 const EXPECTED_TYPOGRAPHY: Record<
   ProfileId,
   Pick<
-    ThemePreferences,
+    Preferences,
     "fontScale" | "lineHeight" | "letterSpacing" | "wordSpacing" | "measure"
   >
 > = {

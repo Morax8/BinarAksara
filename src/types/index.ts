@@ -8,6 +8,8 @@ export interface Preferences {
   fontScale: number;
   letterSpacing: number;
   lineHeight: number;
+  wordSpacing: number;
+  measure: string;
   rulerEnabled: boolean;
   bionicEnabled: boolean;
   syllabificationEnabled: boolean;
@@ -20,9 +22,12 @@ export interface Token {
   syllables: string[];
 }
 
-/** Kartu belajar yang memuat token dan kata kunci. */
+/** Kartu belajar yang memuat teks, token, dan kata kunci. */
 export interface Card {
   id: string;
+  index: number;
+  text: string;
+  sentences: string[];
   tokens: Token[];
   keywords: string[];
 }
@@ -33,13 +38,16 @@ export interface Module {
   title: string;
   sourceText: string;
   cards: Card[];
+  load: { before: LoadScore; after: LoadScore };
 }
 
 /** Butir latihan rumpang untuk satu kartu. */
 export interface ClozeItem {
   id: string;
+  cardId: string;
   prompt: string;
   answer: string;
+  options: string[];
 }
 
 /** Materi contoh yang dapat dipilih pengguna. */
@@ -50,10 +58,16 @@ export interface SampleMaterial {
   content: string;
 }
 
-/** Ringkasan estimasi beban kognitif sebuah teks. */
+/** Heuristik transparan untuk membandingkan kompleksitas teks, bukan diagnosis. */
 export interface LoadScore {
   value: number;
   label: "rendah" | "sedang" | "tinggi";
+  factors: {
+    avgSentenceWords: number;
+    longWordRatio: number;
+    avgClausesPerSentence: number;
+    cardCount: number;
+  };
 }
 
 /** Status pemutaran text-to-speech. */

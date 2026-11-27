@@ -4,24 +4,23 @@ import { useCallback, useEffect, useState } from "react";
 import {
   DEFAULT_PREFERENCES,
   PROFILE_PRESETS,
-  type ThemePreferences,
 } from "@/lib/profiles";
 import { loadPreferences, savePreferences } from "@/lib/storage";
-import type { ProfileId } from "@/types";
+import type { Preferences, ProfileId } from "@/types";
 
 export type PreferenceUpdate = Partial<
-  Omit<ThemePreferences, "activeProfile">
+  Omit<Preferences, "activeProfile">
 >;
 
-function matchesActivePreset(preferences: ThemePreferences): boolean {
+function matchesActivePreset(preferences: Preferences): boolean {
   const preset = PROFILE_PRESETS[preferences.activeProfile];
-  return (Object.keys(preset) as (keyof ThemePreferences)[]).every(
+  return (Object.keys(preset) as (keyof Preferences)[]).every(
     (key) => preferences[key] === preset[key],
   );
 }
 
 export function usePreferences() {
-  const [preferences, setPreferences] = useState<ThemePreferences>(
+  const [preferences, setPreferences] = useState<Preferences>(
     DEFAULT_PREFERENCES,
   );
   const [isLoaded, setIsLoaded] = useState(false);

@@ -1,8 +1,8 @@
 "use client";
 
 import type { PreferenceUpdate } from "@/hooks/usePreferences";
-import { PROFILE_INFO } from "@/lib/profiles";
-import type { Preferences } from "@/types";
+import { FONT_OPTIONS, PROFILE_INFO } from "@/lib/profiles";
+import type { FontFamilyId, Preferences } from "@/types";
 
 type NumericPreferenceKey =
   | "fontScale"
@@ -78,6 +78,18 @@ export default function ManualSettings({
       <p className="mt-1 text-sm text-[var(--ba-muted)]">
         Penyesuaian langsung diterapkan pada pratinjau baca.
       </p>
+
+      <div className="mt-5">
+        <label htmlFor="setting-font" className="font-semibold">Font baca</label>
+        <select
+          id="setting-font"
+          value={preferences.fontFamily}
+          onChange={(event) => onChange({ fontFamily: event.currentTarget.value as FontFamilyId })}
+          className="mt-2 min-h-11 w-full rounded-lg border-2 border-[var(--ba-border-ui)] bg-[var(--ba-surface)] px-3 py-2 text-[var(--ba-fg)]"
+        >
+          {FONT_OPTIONS.map((font) => <option key={font.id} value={font.id}>{font.label}</option>)}
+        </select>
+      </div>
 
       <div className="mt-5 grid gap-6">
         {SETTINGS.map((setting) => {

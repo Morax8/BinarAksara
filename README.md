@@ -18,7 +18,7 @@ Materi berbasis teks sering belum sesuai dengan kebutuhan membaca dan pemrosesan
 | Fitur | Status |
 | --- | --- |
 | Preset profil standar, disleksia, ADHD, dan low vision | Selesai |
-| Pengaturan tipografi dan penyimpanan preferensi lokal | Selesai |
+| Pengaturan tipografi, font Sistem/Lexend/Atkinson Hyperlegible, dan preferensi lokal | Selesai |
 | Pemilihan materi contoh dan tempel teks dalam memori | Selesai |
 | Teks utuh adaptif dan perbandingan dengan teks asli | Selesai |
 | Kartu satu per layar, navigasi, dan mode fokus | Selesai |
@@ -30,7 +30,9 @@ Materi berbasis teks sering belum sesuai dengan kebutuhan membaca dan pemrosesan
 | Text-to-speech | Selesai; memakai Web Speech API browser, highlight kata, dan preferensi kecepatan |
 | Estimasi beban teks heuristik | Selesai; bukan pengukuran medis/klinis |
 | Modul dengan skor sebelum/sesudah berbobot jumlah kata | Selesai |
-| Ekspor dan tampilan cetak | Rencana |
+| Cetak / Simpan PDF seluruh materi adaptif | Selesai; memakai dialog browser dan preferensi aktif |
+
+Font Lexend dan Atkinson Hyperlegible disimpan di dalam repo dan dimuat dengan `next/font/local`; keduanya berlisensi SIL Open Font License 1.1. Sumber, lisensi, dan ukuran berkas dicatat di `src/app/fonts/SOURCES.md`. Pilihan font divalidasi melalui allowlist dan diterapkan pada reader serta cetakan. Font tidak dimuat dari CDN pada runtime.
 
 Pipeline NLP berjalan sepenuhnya di browser: pemisahan kalimat mempertahankan singkatan akademik dan format angka, kartu berisi 1–3 kalimat dengan batas sekitar 420 karakter, dan kata kunci diurutkan berdasarkan frekuensi lalu alfabet. Semua hasil bersifat deterministik. Skor beban hanya heuristik transparan untuk membandingkan teks, bukan diagnosis atau penilaian kemampuan pengguna.
 
@@ -38,13 +40,15 @@ Kuis latihan rumpang dibuat rule-based dari kalimat sumber pada kartu. Jawaban d
 
 ## Kompatibilitas text-to-speech
 
-TTS menggunakan `speechSynthesis` lokal yang disediakan browser dan sistem operasi; tidak ada API suara cloud, berkas audio, atau request jaringan. Tidak ada autoplay. Jika voice Bahasa Indonesia tidak tersedia, aplikasi dapat memakai voice bawaan sistem dan menampilkan peringatan eksplisit. Jika `speechSynthesis` tidak tersedia, kontrol suara dinonaktifkan dan materi tetap dapat dibaca; Chrome atau Edge dapat dicoba sebagai alternatif.
+TTS menggunakan `speechSynthesis` yang disediakan browser dan sistem operasi. BinarAksara tidak memiliki backend atau API TTS sendiri dan tidak menentukan apakah voice bekerja secara lokal maupun online. Tidak ada autoplay. Jika voice Bahasa Indonesia tidak tersedia, aplikasi dapat memakai voice bawaan sistem dan menampilkan peringatan eksplisit. Jika `speechSynthesis` tidak tersedia, kontrol suara dinonaktifkan dan materi tetap dapat dibaca; Chrome atau Edge dapat dicoba sebagai alternatif.
+
+Saat pengguna mengaktifkan TTS dengan voice online, browser atau sistem operasi dapat mengirim teks ke penyedia voice sesuai implementasinya; proses tersebut berada di luar kontrol aplikasi. Perilaku ini bergantung pada browser dan voice, bukan berarti semua voice menggunakan jaringan. Untuk materi sensitif, pilih voice lokal (`localService=true` bila informasi tersebut tersedia) atau jangan gunakan TTS. Materi yang ditempel tidak disimpan ke localStorage; hanya preferensi pengguna yang disimpan di sana. Cetak atau simpan PDF tetap dilakukan melalui dialog browser tanpa upload oleh aplikasi.
 
 Highlight memakai event batas kata browser bila tersedia. Pada browser yang tidak memberikan event tersebut, sorotan tetap bergerak dengan **estimasi durasi** berbasis panjang kata, tanda baca, dan kecepatan—bukan sinkronisasi audio yang dijamin akurat. Dukungan event dan kualitas voice berbeda antar-browser/perangkat; kualitas audio belum diverifikasi secara auditori dalam pengujian otomatis.
 
 ## Skenario penerapan
 
-Seorang dosen menempelkan materi kuliah ke BinarAksara. Mahasiswa kemudian memilih profil baca, materi diolah menjadi urutan kartu, dan modul dapat dicetak dalam tampilan adaptif ketika fitur cetak tersedia. Materi sekolah dapat mengikuti alur yang sama sehingga dosen, guru, dan pendamping tidak perlu menyiapkan salinan teks khusus untuk setiap profil.
+Seorang dosen menempelkan materi kuliah ke BinarAksara. Mahasiswa kemudian memilih profil baca, materi diolah menjadi urutan kartu, dan seluruh modul dapat dicetak atau disimpan sebagai PDF dengan tampilan adaptif melalui dialog browser. Materi sekolah dapat mengikuti alur yang sama sehingga dosen, guru, dan pendamping tidak perlu menyiapkan salinan teks khusus untuk setiap profil.
 
 Sebagai ilustrasi, alur tersebut dapat digunakan dalam lingkungan Universitas Multimedia Nusantara untuk materi Interaksi Manusia dan Komputer. Ini semata-mata **skenario penggunaan**, bukan klaim penggunaan resmi, kerja sama, atau hasil uji pengguna dengan institusi tersebut.
 
@@ -63,7 +67,7 @@ npm install
 npm run dev
 ```
 
-Buka [http://localhost:3000](http://localhost:3000).
+Buka [http://localhost:3000](http://localhost:3000). Penjelasan cara kerja, privasi, dan batasan tersedia di [halaman Tentang](http://localhost:3000/tentang).
 
 Pemeriksaan proyek:
 

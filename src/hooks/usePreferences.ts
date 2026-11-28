@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   DEFAULT_PREFERENCES,
   PROFILE_PRESETS,
+  FONT_STACKS,
 } from "@/lib/profiles";
 import { loadPreferences, savePreferences } from "@/lib/storage";
 import type { Preferences, ProfileId } from "@/types";
@@ -52,7 +53,7 @@ export function usePreferences() {
     );
     root.style.setProperty("--ba-word-spacing", `${preferences.wordSpacing}em`);
     root.style.setProperty("--ba-measure", preferences.measure);
-    root.style.setProperty("--ba-font-reading", preferences.fontFamily);
+    root.style.setProperty("--ba-font-reading", FONT_STACKS[preferences.fontFamily]);
     savePreferences(preferences);
   }, [isLoaded, preferences]);
 

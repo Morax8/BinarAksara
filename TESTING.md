@@ -114,6 +114,26 @@ dihapus setelah pemeriksaan.
 semantik. Kualitas soal untuk materi arbitrer tetap perlu ditinjau pengguna; kartu tanpa
 empat opsi layak sengaja dilewati.
 
+## Verifikasi print, Tentang, dan font lokal — 27 November 2026
+
+Gate: **83 passed, 1 todo**, typecheck/lint/build hijau. `out/tentang.html` tergenerate dan
+route statis `/tentang` merespons 200 pada preview lokal.
+
+| Pemeriksaan | Hasil terukur | Status |
+| --- | --- | --- |
+| Print Low Vision + Atkinson | App screen `display:none`; print `display:block`; background putih; teks `rgb(17,17,17)` | Lolos |
+| Preferensi cetak | Atkinson tetap aktif; font 23.2px, line-height 41.76px untuk skala Low Vision | Lolos |
+| Isi cetak | 3/3 kartu Fotosintesis; tidak ada button/input/link/select di PrintLayout | Lolos |
+| Accessibility tree normal | PrintLayout `display:none` pada screen | Lolos |
+| Halaman Tentang | 10 seksi, metadata tepat, dua link kembali, navigasi statis berfungsi | Lolos |
+| Mobile Tentang | Viewport/scroll width sama-sama 390px; tidak ada horizontal overflow | Lolos |
+| Font dan lisensi | Lexend variable + Atkinson regular/bold tersimpan lokal; kedua OFL tersedia | Lolos |
+| Resource pihak ketiga | 0 request resource eksternal; tidak ada Google Fonts/CDN pada output | Lolos |
+| Klaim privasi TTS | Voice lokal/online dan kemungkinan pengiriman oleh browser dijelaskan tanpa overclaim | Lolos |
+
+**Batas:** audit memakai emulasi `media=print` dan computed style, bukan pemeriksaan visual
+PDF fisik. Dialog Cetak/Simpan PDF tetap perlu dicek manual pada browser demo.
+
 ## Matriks perangkat dan browser
 
 | Perangkat | Sistem operasi | Browser | Status | Catatan |

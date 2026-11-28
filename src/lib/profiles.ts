@@ -7,12 +7,21 @@ export const PROFILE_IDS = [
   "lowVision",
 ] as const;
 
-const SYSTEM_FONT_STACK =
-  'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+export const FONT_OPTIONS = [
+  { id: "system", label: "Sistem" },
+  { id: "lexend", label: "Lexend" },
+  { id: "atkinson", label: "Atkinson Hyperlegible" },
+] as const;
+
+export const FONT_STACKS = {
+  system: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  lexend: 'var(--font-lexend), ui-sans-serif, system-ui, sans-serif',
+  atkinson: 'var(--font-atkinson), ui-sans-serif, system-ui, sans-serif',
+} as const;
 
 export const DEFAULT_PREFERENCES: Preferences = {
   activeProfile: "standar",
-  fontFamily: SYSTEM_FONT_STACK,
+  fontFamily: "system",
   fontScale: 1,
   lineHeight: 1.6,
   letterSpacing: 0,

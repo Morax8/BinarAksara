@@ -3,7 +3,8 @@ import {
   PROFILE_IDS,
   PROFILE_PRESETS,
 } from "@/lib/profiles";
-import type { Preferences, ProfileId } from "@/types";
+import { FONT_STACKS } from "@/lib/profiles";
+import type { FontFamilyId, Preferences, ProfileId } from "@/types";
 
 export const PREFERENCES_STORAGE_KEY = "binaraksara:preferences:v1";
 
@@ -43,11 +44,9 @@ function sanitizePreferences(value: unknown): Preferences | null {
     ? value.activeProfile
     : DEFAULT_PREFERENCES.activeProfile;
   const fallback = PROFILE_PRESETS[activeProfile];
-  const fontFamily =
-    typeof value.fontFamily === "string" &&
-    value.fontFamily.trim().length > 0 &&
-    value.fontFamily.length <= 300
-      ? value.fontFamily
+  const fontFamily: FontFamilyId =
+    typeof value.fontFamily === "string" && Object.hasOwn(FONT_STACKS, value.fontFamily)
+      ? (value.fontFamily as FontFamilyId)
       : fallback.fontFamily;
   const measure =
     typeof value.measure === "string" && /^(?:[1-9]|[1-9]\d|100)ch$/.test(value.measure)

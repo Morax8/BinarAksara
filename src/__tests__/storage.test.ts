@@ -88,6 +88,20 @@ describe("penyimpanan preferensi", () => {
     expect(loadPreferences()).toEqual(DEFAULT_PREFERENCES);
   });
 
+  it("hanya menerima pilihan font dari allowlist", () => {
+    window.localStorage.setItem(
+      PREFERENCES_STORAGE_KEY,
+      JSON.stringify({ ...DEFAULT_PREFERENCES, fontFamily: "lexend" }),
+    );
+    expect(loadPreferences()?.fontFamily).toBe("lexend");
+
+    window.localStorage.setItem(
+      PREFERENCES_STORAGE_KEY,
+      JSON.stringify({ ...DEFAULT_PREFERENCES, fontFamily: "url(https://berbahaya.example/font)" }),
+    );
+    expect(loadPreferences()?.fontFamily).toBe(DEFAULT_PREFERENCES.fontFamily);
+  });
+
   it("membuang field yang tidak dikenal", () => {
     window.localStorage.setItem(
       PREFERENCES_STORAGE_KEY,

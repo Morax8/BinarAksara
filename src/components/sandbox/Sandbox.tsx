@@ -1,9 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import ExportControls from "@/components/controls/ExportControls";
 import ManualSettings from "@/components/controls/ManualSettings";
 import ProfilePresets from "@/components/controls/ProfilePresets";
 import CognitiveLoadMeter from "@/components/meter/CognitiveLoadMeter";
+import PrintLayout from "@/components/print/PrintLayout";
+import { PROFILE_INFO } from "@/lib/profiles";
 import CardReader from "@/components/reader/CardReader";
 import ClozeQuiz from "@/components/reader/ClozeQuiz";
 import ReaderView from "@/components/reader/ReaderView";
@@ -71,13 +75,15 @@ export default function Sandbox() {
   ) : null;
 
   return (
-    <div className="min-h-full bg-[var(--ba-bg)] text-[var(--ba-fg)]">
+    <>
+    <div className="app-screen min-h-full bg-[var(--ba-bg)] text-[var(--ba-fg)]">
       {!focusMode && (
         <header className="border-b border-[var(--ba-border)] bg-[var(--ba-surface)]">
           <div className="mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-8">
             <p className="text-sm font-bold tracking-wide text-[var(--ba-accent)]">Pendamping belajar adaptif</p>
             <h1 className="mt-1 text-3xl font-extrabold md:text-4xl">BinarAksara</h1>
             <p className="mt-2 text-lg text-[var(--ba-muted)]">Satu materi, banyak cara membaca.</p>
+            <Link href="/tentang" className="mt-4 inline-flex min-h-11 items-center font-semibold text-[var(--ba-accent)] underline underline-offset-4">Tentang</Link>
           </div>
         </header>
       )}
@@ -161,6 +167,7 @@ export default function Sandbox() {
           )}
           <CognitiveLoadMeter load={learningModule?.load ?? null} />
           {!focusMode && learningModule && <ClozeQuiz key={learningModule.id} module={learningModule} />}
+          {!focusMode && learningModule && <ExportControls />}
         </section>
 
         {!focusMode && (
@@ -193,5 +200,9 @@ export default function Sandbox() {
         </div>
       )}
     </div>
+    {learningModule && (
+      <PrintLayout module={learningModule} title={source.title} profileLabel={PROFILE_INFO[preferences.activeProfile].label} />
+    )}
+    </>
   );
 }

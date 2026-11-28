@@ -1,3 +1,83 @@
+.print-layout {
+  display: none;
+}
+
+@page {
+  margin: 16mm;
+}
+
 @media print {
-  /* TODO(Export): tambahkan gaya cetak modul belajar yang ramah aksesibilitas. */
+  :root,
+  html,
+  body {
+    color-scheme: light !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  .app-screen,
+  .skip-link {
+    display: none !important;
+  }
+
+  .print-layout {
+    display: block !important;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--ba-measure);
+    margin: 0 auto;
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-family: var(--ba-font-reading);
+    font-size: calc(12pt * var(--ba-font-scale));
+    line-height: var(--ba-line-height);
+    letter-spacing: var(--ba-letter-spacing);
+    word-spacing: var(--ba-word-spacing);
+    overflow-wrap: anywhere;
+  }
+
+  .print-layout header {
+    margin-bottom: 1.5em;
+    padding-bottom: 0.75em;
+    border-bottom: 2px solid #444444;
+    break-after: avoid;
+  }
+
+  .print-layout h1 {
+    margin: 0.25em 0;
+    color: #111111;
+    font-size: 1.6em;
+    break-after: avoid;
+  }
+
+  .print-layout h2 {
+    margin: 0 0 0.4em;
+    color: #222222;
+    font-size: 1.1em;
+    break-after: avoid;
+  }
+
+  .print-layout p {
+    margin: 0;
+    color: #111111;
+  }
+
+  .print-layout .print-brand {
+    color: #333333;
+    font-weight: 700;
+  }
+
+  .print-card {
+    margin-bottom: 1.25em;
+    padding-top: 0.25em;
+    border-top: 1px solid #999999;
+    break-inside: auto;
+  }
+
+  .ba-word-active {
+    background: transparent !important;
+    color: inherit !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 }

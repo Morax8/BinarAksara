@@ -2,9 +2,11 @@
 export type ProfileId = "standar" | "disleksia" | "adhd" | "lowVision";
 
 /** Preferensi tampilan dan pembacaan yang dipilih pengguna. */
+export type FontFamilyId = "system" | "lexend" | "atkinson";
+
 export interface Preferences {
   activeProfile: ProfileId;
-  fontFamily: string;
+  fontFamily: FontFamilyId;
   fontScale: number;
   letterSpacing: number;
   lineHeight: number;

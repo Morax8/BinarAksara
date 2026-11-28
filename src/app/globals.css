@@ -106,6 +106,16 @@ body {
   text-align: left;
 }
 
+.ba-word-active {
+  background: var(--ba-word-bg);
+  color: var(--ba-word-fg);
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 :focus-visible {
   outline: 3px solid var(--ba-focus);
   outline-offset: 2px;

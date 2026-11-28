@@ -71,4 +71,4 @@ export interface LoadScore {
 }
 
 /** Status pemutaran text-to-speech. */
-export type SpeechStatus = "idle" | "playing" | "paused" | "unavailable";
+export type SpeechStatus = "idle" | "playing" | "paused" | "unavailable" | "error";

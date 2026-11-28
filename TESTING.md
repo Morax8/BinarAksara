@@ -74,6 +74,26 @@ Materi uji: sampel Kompleksitas Waktu (9 kartu) dan teks tempel pengguna.
 | Mobile 390px | Profil 2x2 (dua baris y=257/313) → pratinjau → materi → pengaturan | Lolos |
 | Regresi mode fokus | Profil, input, dan pengaturan hilang dari DOM | Lolos |
 
+## Verifikasi TTS hybrid — 27 November 2026
+
+Gate: **57 passed, 2 todo**, typecheck/lint/build hijau. Tiga regresi diuji dengan
+`speechSynthesis` mock agar jalur timing dan pemanggilan API dapat diverifikasi tanpa
+mengandalkan voice yang tersedia di mesin audit.
+
+| Pemeriksaan | Hasil terukur | Status |
+| --- | --- | --- |
+| Pause sebelum fallback 1200ms | Mode tetap boundary saat paused; fallback aktif setelah resume | Lolos |
+| Resume setelah pause dini | `speak()` tetap 1 kali; tidak ada `cancel()` tambahan dari resume | Lolos |
+| Pause/resume saat timing aktif | Kata aktif tetap sama selama pause; mode kembali timing; `speak()` tetap 1 kali | Lolos |
+| Stop/reset | Timer, utterance, dan highlight dibersihkan | Lolos |
+| Ketersediaan voice | Chromium audit hanya memiliki voice en-US; UI menyatakan voice Indonesia tidak ditemukan | Lolos, jujur |
+| Error speech browser | Error ditampilkan sebagai error dan bukan pemutaran sukses | Lolos |
+| Aksesibilitas highlight | Tidak ada aria-live per kata; status kontrol tetap dapat dibaca | Lolos |
+
+**Batas verifikasi:** kualitas audio, voice `id-ID`, dan sinkronisasi boundary pada browser
+dengan voice sungguhan belum diverifikasi secara auditori. Wajib diuji manual di Chrome/Edge
+pada laptop demo; jangan menyebut TTS sudah teruji pada semua browser.
+
 ## Matriks perangkat dan browser
 
 | Perangkat | Sistem operasi | Browser | Status | Catatan |

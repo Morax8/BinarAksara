@@ -27,12 +27,18 @@ Materi berbasis teks sering belum sesuai dengan kebutuhan membaca dan pemrosesan
 | Kartu belajar, token, dan ekstraksi kata kunci TF | Selesai |
 | Pemenggal suku kata | Rencana; `syllables` masih kosong |
 | Latihan rumpang | Rencana; `createClozeItems` masih stub |
-| Text-to-speech | Rencana |
+| Text-to-speech | Selesai; memakai Web Speech API browser, highlight kata, dan preferensi kecepatan |
 | Estimasi beban teks heuristik | Selesai; bukan pengukuran medis/klinis |
 | Modul dengan skor sebelum/sesudah berbobot jumlah kata | Selesai |
 | Ekspor dan tampilan cetak | Rencana |
 
 Pipeline NLP berjalan sepenuhnya di browser: pemisahan kalimat mempertahankan singkatan akademik dan format angka, kartu berisi 1–3 kalimat dengan batas sekitar 420 karakter, dan kata kunci diurutkan berdasarkan frekuensi lalu alfabet. Semua hasil bersifat deterministik. Skor beban hanya heuristik transparan untuk membandingkan teks, bukan diagnosis atau penilaian kemampuan pengguna.
+
+## Kompatibilitas text-to-speech
+
+TTS menggunakan `speechSynthesis` lokal yang disediakan browser dan sistem operasi; tidak ada API suara cloud, berkas audio, atau request jaringan. Tidak ada autoplay. Jika voice Bahasa Indonesia tidak tersedia, aplikasi dapat memakai voice bawaan sistem dan menampilkan peringatan eksplisit. Jika `speechSynthesis` tidak tersedia, kontrol suara dinonaktifkan dan materi tetap dapat dibaca; Chrome atau Edge dapat dicoba sebagai alternatif.
+
+Highlight memakai event batas kata browser bila tersedia. Pada browser yang tidak memberikan event tersebut, sorotan tetap bergerak dengan **estimasi durasi** berbasis panjang kata, tanda baca, dan kecepatan—bukan sinkronisasi audio yang dijamin akurat. Dukungan event dan kualitas voice berbeda antar-browser/perangkat; kualitas audio belum diverifikasi secara auditori dalam pengujian otomatis.
 
 ## Skenario penerapan
 

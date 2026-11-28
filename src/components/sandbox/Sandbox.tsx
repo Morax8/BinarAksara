@@ -66,7 +66,7 @@ export default function Sandbox() {
   }
 
   const reading = learningModule ? (
-    mode === "card" ? <CardReader key={learningModule.id} module={learningModule} /> : <ReaderView module={learningModule} />
+    mode === "card" ? <CardReader key={learningModule.id} module={learningModule} rate={preferences.ttsRate} onRateChange={(rate) => updatePreference({ ttsRate: rate })} /> : <ReaderView module={learningModule} rate={preferences.ttsRate} onRateChange={(rate) => updatePreference({ ttsRate: rate })} />
   ) : null;
 
   return (

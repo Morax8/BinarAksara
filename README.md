@@ -26,13 +26,15 @@ Materi berbasis teks sering belum sesuai dengan kebutuhan membaca dan pemrosesan
 | Pemecahan kalimat berbasis aturan | Selesai |
 | Kartu belajar, token, dan ekstraksi kata kunci TF | Selesai |
 | Pemenggal suku kata | Rencana; `syllables` masih kosong |
-| Latihan rumpang | Rencana; `createClozeItems` masih stub |
+| Latihan rumpang | Selesai; rule-based, empat opsi tersaring, dan deterministik |
 | Text-to-speech | Selesai; memakai Web Speech API browser, highlight kata, dan preferensi kecepatan |
 | Estimasi beban teks heuristik | Selesai; bukan pengukuran medis/klinis |
 | Modul dengan skor sebelum/sesudah berbobot jumlah kata | Selesai |
 | Ekspor dan tampilan cetak | Rencana |
 
 Pipeline NLP berjalan sepenuhnya di browser: pemisahan kalimat mempertahankan singkatan akademik dan format angka, kartu berisi 1–3 kalimat dengan batas sekitar 420 karakter, dan kata kunci diurutkan berdasarkan frekuensi lalu alfabet. Semua hasil bersifat deterministik. Skor beban hanya heuristik transparan untuk membandingkan teks, bukan diagnosis atau penilaian kemampuan pengguna.
+
+Kuis latihan rumpang dibuat rule-based dari kalimat sumber pada kartu. Jawaban dan pengecoh disaring berdasarkan stopword, panjang, kelas leksikal, duplikasi, substring, dan kemunculan dalam kalimat soal; kartu tanpa empat opsi layak dilewati. Pemilihan dan urutan soal deterministik berdasarkan seed, sehingga dapat diacak ulang secara lokal. Jawaban dan skor hanya berada di memori selama sesi dan tidak disimpan.
 
 ## Kompatibilitas text-to-speech
 

@@ -5,9 +5,11 @@ export const STOPWORDS_ID: readonly string[] = [
   "guna", "hal", "hasil", "hingga", "ialah", "ini", "itu", "jadi", "juga",
   "kami", "kamu", "karena", "kepada", "ketika", "kini", "kita", "lagi", "lain",
   "lebih", "maka", "mereka", "merupakan", "namun", "oleh", "pada", "para",
+  "hanya", "kali", "kemudian", "melalui",
   "perlu", "saat", "saja", "sama", "sangat", "satu", "sebagai", "sebuah",
   "secara", "sedang", "sehingga", "sejak", "semua", "seperti", "serta", "setelah",
   "setiap", "suatu", "sudah", "tanpa", "telah", "tentang", "terhadap", "tersebut",
   "tetapi", "tidak", "untuk", "yaitu", "yang", "berarti", "bagaimana",
-  "berlangsung", "digunakan", "menjadi", "dilakukan",
+  "berlangsung", "digunakan", "menjadi", "dilakukan", "bukan", "cukup",
+  "dihasilkan", "dikelompokkan", "muncul", "menyatakan",
 ];

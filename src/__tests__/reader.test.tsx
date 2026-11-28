@@ -99,7 +99,7 @@ describe("tata letak Sandbox", () => {
   it("memuat sampel pertama dan menutup pengaturan manual saat pertama dibuka", () => {
     render(<Sandbox />);
 
-    expect(screen.getByText(/Fotosintesis adalah proses tumbuhan/)).not.toBeNull();
+    expect(screen.getAllByText(/Fotosintesis adalah proses tumbuhan/).length).toBeGreaterThan(0);
     expect(screen.getByRole("button", { name: new RegExp(SAMPLES[0].title) }).getAttribute("aria-pressed")).toBe("true");
 
     const disclosure = screen.getByRole("button", { name: "Sesuaikan tampilan" });
@@ -109,6 +109,7 @@ describe("tata letak Sandbox", () => {
     fireEvent.click(disclosure);
     expect(disclosure.getAttribute("aria-expanded")).toBe("true");
     expect(screen.getByRole("slider", { name: "Ukuran teks" })).not.toBeNull();
+    expect(screen.getByRole("region", { name: "Latih pemahaman" })).not.toBeNull();
   });
 
   it("menampilkan deskripsi hanya untuk profil aktif dan mendahulukan pratinjau", () => {
@@ -137,6 +138,7 @@ describe("mode fokus", () => {
     expect(screen.queryByRole("tab", { name: "Materi contoh" })).toBeNull();
     expect(screen.queryByRole("radio", { name: /^Disleksia/ })).toBeNull();
     expect(screen.queryByRole("slider", { name: "Ukuran teks" })).toBeNull();
+    expect(screen.queryByRole("region", { name: "Latih pemahaman" })).toBeNull();
 
     fireEvent.click(screen.getByRole("button", { name: "Kembali ke tampilan lengkap" }));
     expect(screen.getByRole("tab", { name: "Materi contoh" })).not.toBeNull();

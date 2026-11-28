@@ -5,6 +5,7 @@ import ManualSettings from "@/components/controls/ManualSettings";
 import ProfilePresets from "@/components/controls/ProfilePresets";
 import CognitiveLoadMeter from "@/components/meter/CognitiveLoadMeter";
 import CardReader from "@/components/reader/CardReader";
+import ClozeQuiz from "@/components/reader/ClozeQuiz";
 import ReaderView from "@/components/reader/ReaderView";
 import ReadingRuler from "@/components/reader/ReadingRuler";
 import BeforeAfterToggle from "./BeforeAfterToggle";
@@ -159,6 +160,7 @@ export default function Sandbox() {
             </div>
           )}
           <CognitiveLoadMeter load={learningModule?.load ?? null} />
+          {!focusMode && learningModule && <ClozeQuiz key={learningModule.id} module={learningModule} />}
         </section>
 
         {!focusMode && (

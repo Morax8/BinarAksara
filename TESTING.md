@@ -94,6 +94,26 @@ mengandalkan voice yang tersedia di mesin audit.
 dengan voice sungguhan belum diverifikasi secara auditori. Wajib diuji manual di Chrome/Edge
 pada laptop demo; jangan menyebut TTS sudah teruji pada semua browser.
 
+## Verifikasi kuis rumpang — 27 November 2026
+
+Gate: **77 passed, 1 todo**, typecheck/lint/build hijau. Generator diaudit terpisah dari
+test implementasi dengan mengekspor seluruh soal ketiga sampel secara sementara; file probe
+dihapus setelah pemeriksaan.
+
+| Pemeriksaan | Hasil terukur | Status |
+| --- | --- | --- |
+| Jumlah soal | Fotosintesis 3/3 kartu; Aksesibilitas IMK 3/3; Kompleksitas Waktu 9/9 | Lolos |
+| Sumber jawaban | Seluruh jawaban merupakan keyword kartu dan muncul pada kalimat sumber | Lolos |
+| Opsi | 4 opsi unik; pengecoh dari pool keyword; kelas leksikal, substring, stopword, dan kebocoran prompt difilter | Lolos |
+| Determinisme | Modul+seed sama menghasilkan item identik tanpa mengubah Module | Lolos |
+| Alur UI | Pilih, feedback benar/salah, soal berikutnya, skor, ulangi, dan acak ulang berfungsi | Lolos |
+| Fokus dan reset | Fokus pindah ke soal berikutnya; ganti materi kembali ke Soal 1 | Lolos |
+| Mode fokus dan privasi | Kuis hilang saat mode fokus; hanya key preferensi yang ada di localStorage | Lolos |
+
+**Batas:** pemilihan konsep dan pengecoh merupakan heuristik keyword, bukan pemahaman
+semantik. Kualitas soal untuk materi arbitrer tetap perlu ditinjau pengguna; kartu tanpa
+empat opsi layak sengaja dilewati.
+
 ## Matriks perangkat dan browser
 
 | Perangkat | Sistem operasi | Browser | Status | Catatan |
